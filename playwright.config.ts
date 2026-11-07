@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -19,7 +19,7 @@ export default defineConfig({
       name: 'chromium',
       use: { 
         browserName: 'chromium',
-        headless: false,
+        headless: !!process.env.CI,
         viewport: null,
         launchOptions: {args: ['--start-maximized'],
         },

@@ -1,19 +1,16 @@
+import type { APIRequestContext, APIResponse } from '@playwright/test';
 
-export class ToolShopApiClient
-{
+export class ToolShopApiClient {
+  constructor(private readonly request: APIRequestContext) {}
 
-    request:any;
-    constructor (request:any)
-    {
-        this.request = request;
+  loginApi(email: string, password: string): Promise<APIResponse> {
+    const baseUrl = process.env.API_URL;
+    if (!baseUrl) {
+      throw new Error('API_URL is not set');
     }
-
-    async loginApi(email: string, password: string)
-    {
-        const url = process.env.API_URL + 'users/login';
-        const response = await this.request.post(url, {
-            data: { email: email, password: password }
-        });
-        return response;
-    }
+    const url = new URL('users/login', baseUrl).toString();
+    return this.request.post(url, {
+      data: { email, password },
+    });
+  }
 }

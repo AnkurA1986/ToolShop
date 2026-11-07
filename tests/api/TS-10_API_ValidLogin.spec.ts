@@ -1,26 +1,20 @@
-import {test, expect, request} from '@playwright/test';
-import data from '../../src/data/loginData.json';
+import { test, expect } from '@playwright/test';
 import { ToolShopApiClient } from '../../src/utils/ToolShopApiClient';
 
-test.describe('API Login', ()=>{
-  test('API - Login with valid credentials', async({request})=>{
-  // const URL_loginApi = process.env.API_URL + 'users/login';
-  // const response = await request.post(URL_loginApi,
-  //   {
-  //     data:{email: data[0].validLogin.username, password: data[0].validLogin.password}
-  //   });
-  //   const responseBody = await response.json();
-    const tsapi = new ToolShopApiClient(request);
+test.describe('API Login', () => {
+  test('API - Login with valid credentials', async ({ request }) => {
     const email = process.env.USER_EMAIL;
     const password = process.env.USER_PASSWORD;
-    console.log(email, password);
     if (!email || !password) {
-      throw new Error('Email or password is not set');
+      throw new Error('USER_EMAIL and USER_PASSWORD must be set in .env');
     }
+
+    const tsapi = new ToolShopApiClient(request);
     const response = await tsapi.loginApi(email, password);
     const responseBody = await response.json();
-  
-    await expect(response.status()).toBe(200);
+
+    await expect(response).toBeOK();
     await expect(responseBody.token_type).toBe('bearer');
-})
-})
+    expect(responseBody.access_token).toBeTruthy();
+  });
+});

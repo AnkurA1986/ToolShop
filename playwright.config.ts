@@ -19,7 +19,8 @@ export default defineConfig({
       name: 'chromium',
       use: { 
         browserName: 'chromium',
-        headless: !!process.env.CI,
+        baseURL : process.env.BASE_URL,
+        headless: false,
         viewport: null,
         launchOptions: {args: ['--start-maximized'],
         },

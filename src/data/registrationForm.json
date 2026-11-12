@@ -1,0 +1,14 @@
+{
+    "firstName": "TestAAFirst",
+    "lastName": "TestLast",
+    "dob" : "1986-01-01",
+    "country": "India",
+    "postalCode" : "445566",
+    "houseNumber": "7741",
+    "Street" : "West Bangalore",
+    "City" : "Bangalore",
+    "State" : "Karnataka",
+    "phone" : "4455887701",
+    "email" : "testaafirst.last@gmail.com",
+    "Password" : "heLLoWorld@123"
+}

@@ -15,13 +15,10 @@ export class Register_ErrorValidation
     error_Phone:Locator;
     error_Email:Locator;
     error_Password:Locator;
-    button_Register:Locator;
-    FirstName:Locator;
-
+        
     constructor(page:Page)
     {
         this.page=page;
-        this.button_Register=page.getByRole('button',{'name':'Register'});
         this.error_FirstName=page.locator('#first_name-error');
         this.error_LastName=page.locator('#last_name-error');
         this.error_Dob=page.locator('#dob-error');
@@ -34,18 +31,6 @@ export class Register_ErrorValidation
         this.error_Phone=page.locator('#phone-error');
         this.error_Email=page.locator('#email-error');
         this.error_Password=page.locator('#password-error');
-        this.FirstName=page.locator('#first_name');
-    }
-
-    async ErorrValidation_Register()
-    {
-        this.button_Register.click();
-        const name = await this.FirstName.textContent();
-        await console.log(name);
-        if (this.FirstName.textContent() === null)
-        {
-            await expect(this.error_FirstName).toBeVisible();
-        }
-
+        
     }
 }

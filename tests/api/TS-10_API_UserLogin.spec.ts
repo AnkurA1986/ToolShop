@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { ToolShopApiClient } from '../../src/utils/ToolShopApiClient';
+import {buildUniqueEmail} from '../../src/utils/uniqueEmail';
+import registerData from '../../src/data/registrationForm.json';
 
 test.describe('API Login', () => {
-  test('API - Login with valid credentials', async ({ request }) => {
-    const email = process.env.USER_EMAIL;
-    const password = process.env.USER_PASSWORD;
+  test('@API API - Login with valid credentials', async ({ request }) => {
+    const email = buildUniqueEmail(registerData.firstName);
+    const password = registerData.Password;;
     if (!email || !password) {
       throw new Error('USER_EMAIL and USER_PASSWORD must be set in .env');
     }

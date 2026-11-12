@@ -1,12 +1,11 @@
 import {Page, Locator} from '@playwright/test';
 
-export class Register_Navigation
+export class Navigation
 {
     page:Page;
     button_signIn:Locator;
     link_register:Locator;
-    
-    
+        
     constructor(page:Page)
     {
         this.page=page;
@@ -20,6 +19,12 @@ export class Register_Navigation
         await this.page.goto('/');
         await this.button_signIn.click();
         await this.link_register.click();
+    }
+
+    async nav_login()
+    {
+        await this.page.goto('/');
+        await this.button_signIn.click();
     }
 
     

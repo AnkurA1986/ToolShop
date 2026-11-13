@@ -1,22 +1,14 @@
-import { test, expect } from '@playwright/test';
-import { ToolShopApiClient } from '../../src/utils/ToolShopApiClient';
-import {buildUniqueEmail} from '../../src/utils/uniqueEmail';
-import registerData from '../../src/data/registrationForm.json';
+import {test, expect} from '../../src/fixtures/fixture_LoginAPI';
 
-test.describe('API Login', () => {
-  test('@API API - Login with valid credentials', async ({ request }) => {
-    const email = buildUniqueEmail(registerData.firstName);
-    const password = registerData.Password;;
-    if (!email || !password) {
-      throw new Error('USER_EMAIL and USER_PASSWORD must be set in .env');
-    }
-
-    const tsapi = new ToolShopApiClient(request);
-    const response = await tsapi.loginApi(email, password);
-    const responseBody = await response.json();
-
-    await expect(response).toBeOK();
-    await expect(responseBody.token_type).toBe('bearer');
-    expect(responseBody.access_token).toBeTruthy();
-  });
-});
+test('API - Login',{tag:['@API']}, async({request, registeredUser})=>{
+  const url = new URL('/users/login',process.env.API_URL).toString();
+  const payload = {"email":registeredUser.email,"password":registeredUser.password};
+  
+  const response = await request.post(url,{data:payload});
+  console.log("Login API status- "+response.status());
+  console.log("Login API Email- "+registeredUser.email);
+  await expect(response).toBeOK();
+  const responseJson = await response.json();
+  await expect(responseJson.token_type).toEqual('bearer');
+  await expect(responseJson.access_token).toBeTruthy();
+})

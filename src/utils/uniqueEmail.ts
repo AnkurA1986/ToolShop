@@ -10,6 +10,6 @@ export function buildUniqueEmail(firstName: string)
     const hh = String(now.getHours()).padStart(2, '0');
     const min = String(now.getMinutes()).padStart(2, '0');
     const sec = String(now.getSeconds()).padStart(2, '0');
-    const uniqueEmail= registrationForm.firstName.toLowerCase()+yyyy+mm+dd+hh+min+sec+'@gmail.com';
+    const uniqueEmail= registrationForm.firstName.toLowerCase()+yyyy+mm+dd+'.'+Date.now()+'@gmail.com';
     return uniqueEmail;
 }

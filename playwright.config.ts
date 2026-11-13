@@ -17,7 +17,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { 
+      use: {
         browserName: 'chromium',
         baseURL : process.env.BASE_URL,
         headless: false,
@@ -26,5 +26,18 @@ export default defineConfig({
         },
       },
     },
+
+    // {
+    //   name: 'api-setup',
+    //   testMatch: /API_UserRegistration\.spec\.ts/,
+    // },
+
+    // {
+    //   name: 'api',
+    //   testMatch: /tests\/api\/.*\.spec\.ts/,
+    //   testIgnore: /API_UserRegistration\.spec\.ts/,
+    //   dependencies: ['api-setup'],
+    // },
+    
 ],
 });

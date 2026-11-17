@@ -56,8 +56,11 @@ export class Register_Success
         const emailId = buildUniqueEmail(registrationForm.firstName);
         
         await this.Email.fill(emailId);
-        await this.password.fill(registrationForm.Password);
+        const Pass = registrationForm.Password;
+        await this.password.fill(Pass);
+        return {emailId,Pass};
         
+
 
     }
 
